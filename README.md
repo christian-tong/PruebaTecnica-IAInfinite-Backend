@@ -65,7 +65,7 @@ docker-compose up -d
 
 1. **Iniciar el servidor**:
    ```bash
-   npm start
+   node .\src\server.js
    ```
 
 El backend estará disponible en `http://localhost:3000`.
