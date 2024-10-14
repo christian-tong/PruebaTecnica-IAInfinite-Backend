@@ -32,8 +32,7 @@ cd PruebaTecnica-IAInfinite-Backend
    ```bash
    npm install
    ```
-2. **Configurar el archivo `.env`** (crear un archivo `.env` en el directorio `backend` con la configuración de la base de datos, Redis y RabbitMQ).
-
+   
 ### Paso 3: Ejecutar Servicios con Docker
 
 Para ejecutar Redis y RabbitMQ mediante Docker, utiliza el siguiente archivo `docker-compose.yml`:
