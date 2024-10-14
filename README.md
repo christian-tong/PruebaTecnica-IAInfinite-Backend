@@ -15,6 +15,7 @@ El proyecto permite el registro de clientes, donde el usuario ingresa su informa
 - **Node.js**: v14 o superior.
 - **Docker** y **Docker Compose**.
 - **Redis** y **RabbitMQ** (estos servicios se ejecutan en contenedores Docker).
+- **MySQL**: Deberás tener una base de datos MySQL configurada.
 
 ## Instalación y Configuración
 
@@ -32,8 +33,50 @@ cd PruebaTecnica-IAInfinite-Backend
    ```bash
    npm install
    ```
-   
-### Paso 3: Ejecutar Servicios con Docker
+
+### Paso 3: Crear la Base de Datos
+
+Antes de que el proyecto pueda funcionar correctamente, es necesario crear las tablas en la base de datos MySQL. Para ello, debes seguir estos pasos utilizando el archivo `db.sql` proporcionado:
+
+1. **Acceder al Servidor MySQL**:
+   - Si tienes MySQL instalado localmente, abre la terminal y accede a tu servidor MySQL utilizando el siguiente comando:
+     
+     ```bash
+     mysql -u root -p
+     ```
+     - Aquí, `root` es el usuario administrador de MySQL. Si estás utilizando otro usuario, reemplázalo en consecuencia. Después de ejecutar el comando, se te pedirá la contraseña del usuario.
+
+2. **Seleccionar o Crear la Base de Datos**:
+   - Si no tienes una base de datos creada para este proyecto, puedes crearla con el siguiente comando:
+     
+     ```sql
+     CREATE DATABASE IF NOT EXISTS prueba_tecnica_db;
+     ```
+   - Luego, selecciona la base de datos que acabas de crear o que ya tienes configurada:
+     
+     ```sql
+     USE prueba_tecnica_db;
+     ```
+
+3. **Copiar el Contenido de `db.sql`**:
+   - Abre el archivo `db.sql` con cualquier editor de texto. Este archivo contiene todas las instrucciones SQL necesarias para crear las tablas que el proyecto utilizará.
+   - Copia todo el contenido del archivo. El archivo debería incluir comandos como `CREATE TABLE` que configuran las tablas para almacenar clientes, registros de correos, parámetros globales, y más.
+
+4. **Pegar y Ejecutar las Instrucciones en MySQL**:
+   - Vuelve a la consola de MySQL, donde ya deberías estar conectado a la base de datos. Pega el contenido que copiaste del archivo `db.sql` en la terminal y presiona **Enter** para ejecutar los comandos.
+   - Esto creará todas las tablas necesarias en la base de datos que el proyecto utilizará para registrar clientes, administrar correos electrónicos, y almacenar parámetros globales.
+
+5. **Verificar que las Tablas se Crearon Correctamente**:
+   - Puedes verificar que las tablas se hayan creado correctamente con el siguiente comando:
+     
+     ```sql
+     SHOW TABLES;
+     ```
+   - Esto te mostrará una lista de las tablas en tu base de datos `prueba_tecnica_db`, que deberían incluir `clients`, `email_logs`, `global_parameters`, y `tokens`.
+
+Con esto, habrás configurado correctamente la base de datos para que el proyecto pueda interactuar con ella.
+
+### Paso 4: Ejecutar Servicios con Docker
 
 Para ejecutar Redis y RabbitMQ mediante Docker, utiliza el siguiente archivo `docker-compose.yml`:
 
@@ -60,7 +103,7 @@ Ejecuta el siguiente comando para iniciar los servicios:
 docker-compose up -d
 ```
 
-### Paso 4: Ejecutar el Backend
+### Paso 5: Ejecutar el Backend
 
 1. **Iniciar el servidor**:
    ```bash
@@ -98,3 +141,4 @@ Las contribuciones son bienvenidas. Por favor, abre un issue primero para discut
 ## Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+
